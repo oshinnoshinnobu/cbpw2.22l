@@ -1,7 +1,35 @@
 <div wire:init="initOne">
 
-@if (empty($albums))
+    <!-- Filter bar (always visible) -->
+    <nav class="navbar navbar-expand-lg navbar-dark filterBar mb-4">
+      <div class="container">
+          <div class="btn-group btn-block text-center">
+              <a wire:loading.remove wire:target="sortBy('view')" wire:click="sortBy('view')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="fas fa-redo"></i> Sort by Views</a>
+              <a wire:loading wire:target="sortBy('view')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Sort by Views</a>
+              <a wire:loading.remove wire:target="sortBy('random')" wire:click="sortBy('random')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="fas fa-dice"></i> Sort by Random</a>
+              <a wire:loading wire:target="sortBy('random')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Sort by Random</a>
+              <a wire:loading.remove wire:target="$emit('showModal')" wire:click="$emit('showModal')" type="button" class="btn blackBtn btn-sm text-white userMenuBtn"><i class="fas fa-chart-bar"></i> Stats</a>
+              <a wire:loading wire:target="$emit('showModal')" type="button" class="btn blackBtn btn-sm text-white userMenuBtn"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Stats</a>
+          </div>
+      </div>
+    </nav>
 
+    @if ($invalidParams ?? false)
+        <div class="container text-center">
+            <div class="py-5">
+                <div class="mb-4">
+                    <i class="fas fa-search text-danger" style="font-size: 4rem; opacity: 0.7;"></i>
+                </div>
+                <h4 class="text-white mb-3 font-weight-bold">No results</h4>
+                <p class="text-white mb-4">
+                    We couldn't find any matches for the provided search parameters. Please try adjusting your criteria.
+                </p>
+                <a href="{{ url('/') }}" class="btn btn-sm btn-danger">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    @elseif (empty($albums))
         <div class="text-center">
             <div class="page-load-status mt-4 mb-4">
                 <div class="loader-ellips infinite-scroll-request">
@@ -12,20 +40,8 @@
                 </div>
               </div>
         </div>
-            @else
-            <nav class="navbar navbar-expand-lg navbar-dark filterBar mb-4">
-              <div class="container">
-                  <div class="btn-group btn-block text-center">
-                      <a wire:loading.remove wire:target="sortBy('view')" wire:click="sortBy('view')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="fas fa-redo"></i> Sort by Views</a>
-                      <a wire:loading wire:target="sortBy('view')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Sort by Views</a>
-                      <a wire:loading.remove wire:target="sortBy('random')" wire:click="sortBy('random')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="fas fa-dice"></i> Sort by Random</a>
-                      <a wire:loading wire:target="sortBy('random')" class="btn blackBtn btn-sm userMenuBtn text-white" href="#"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Sort by Random</a>
-                      <a wire:loading.remove wire:target="$emit('showModal')" wire:click="$emit('showModal')" type="button" class="btn blackBtn btn-sm text-white userMenuBtn"><i class="fas fa-chart-bar"></i> Stats</a>
-                      <a wire:loading wire:target="$emit('showModal')" type="button" class="btn blackBtn btn-sm text-white userMenuBtn"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Stats</a>
-                  </div>
-              </div>
-          </nav>
-          <div class="container">
+                        @else
+                    <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-12">
             <div class="row" id="albumsBox">
