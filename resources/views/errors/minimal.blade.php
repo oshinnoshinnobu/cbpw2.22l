@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     <div class="d-flex align-items-center justify-content-center min-vh-100 p-3">
         <div class="text-center">
             <div class="mb-3">
-                <i class="fas fa-exclamation-circle text-purple" style="font-size: 3rem; opacity: 0.7;"></i>
+                <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem; opacity: 0.7;"></i>
             </div>
             <h1 class="text-white mb-2 font-weight-bold">
                 {{ $exception?->getStatusCode() ?? 500 }}
