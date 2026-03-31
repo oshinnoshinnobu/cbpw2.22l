@@ -18,7 +18,7 @@
         <div class="container text-center">
             <div class="py-5">
                 <div class="mb-4">
-                    <i class="fas fa-search text-danger" style="font-size: 4rem; opacity: 0.7;"></i>
+                    <i class="fas fa-search text-white" style="font-size: 4rem; opacity: 0.7;"></i>
                 </div>
                 <h4 class="text-white mb-3 font-weight-bold">No results</h4>
                 <p class="text-white mb-4">
